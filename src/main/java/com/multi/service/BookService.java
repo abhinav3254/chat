@@ -4,10 +4,12 @@ package com.multi.service;
 import com.multi.entity.Book;
 import com.multi.repo.BookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -62,7 +64,7 @@ public class BookService {
             Page<Book> bookPage = bookRepo.findAll(pageable);
 
             // Return the page of books as a ResponseEntity
-            return new ResponseEntity<>(bookPage, HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(bookPage, HttpStatus.OK);
         } catch (Exception e) {
             logger.error("Error occurred while retrieving books", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -155,4 +157,27 @@ public class BookService {
         return oldBook;
     }
 
+
+    /**
+     * Retrieves a page of books by a specific author.
+     *
+     * @param author The name of the author to search for.
+     * @param page   The page number (zero-based) to retrieve.
+     * @param size   The number of items per page.
+     * @return A ResponseEntity containing a Page of Book objects that match the given author,
+     *         or an INTERNAL_SERVER_ERROR response if an exception occurs during the process.
+     */
+    public ResponseEntity<Page<Book>> findBookByAuthor(String author, int page, int size) {
+        try {
+
+            List<Book> list = bookRepo.findBookByAuthorName(author);
+            Pageable pageable = PageRequest.of(page, size);
+            Page<Book> bookPage = new PageImpl<>(list, pageable, list.size());
+            return new ResponseEntity<>(bookPage, HttpStatus.OK);
+
+        } catch (Exception e) {
+            logger.error("find by author went into error :- ", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

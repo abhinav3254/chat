@@ -41,4 +41,12 @@ public class BookController {
         return bookService.updateBook(id,book);
     }
 
+    @GetMapping("/author/{author}")
+    public ResponseEntity<Page<Book>> findBookByAuthor(@PathVariable String author,
+                                                       @RequestParam(defaultValue = "0") Integer page,
+                                                       @RequestParam(defaultValue = "10") Integer size
+                                                       ) {
+        return bookService.findBookByAuthor(author,page,size);
+    }
+
 }
