@@ -8,18 +8,27 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.Date;
-import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 
+/**
+ * Service class for managing books.
+ */
 @Service
 public class BookService {
 
     @Autowired
     private BookRepo bookRepo;
 
+
+    /**
+     * Adds a new book to the repository.
+     *
+     * @param book The book to be added.
+     * @return ResponseEntity indicating the status of the operation.
+     */
     public ResponseEntity<String> addMovie(Book book) {
         try {
             book.setDate(new Date());
@@ -31,6 +40,13 @@ public class BookService {
         return new ResponseEntity<>("something went wrong", HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * Retrieves a paginated list of all books.
+     *
+     * @param page The requested page number.
+     * @param size The number of books per page.
+     * @return ResponseEntity containing the paginated list of books.
+     */
     public ResponseEntity<Page<Book>> getAllBooks(int page, int size) {
         try {
             // Create a Pageable object to represent the requested page
