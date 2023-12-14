@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.Date;
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -66,4 +68,91 @@ public class BookService {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    /**
+     * Deletes a book with the given ID.
+     *
+     * @param id The ID of the book to be deleted.
+     * @return ResponseEntity indicating the result of the deletion operation.
+     */
+    public ResponseEntity<String> deleteBook(Long id) {
+        try {
+            Optional<Book> optionalBook = bookRepo.findById(id);
+            if (optionalBook.isPresent()) {
+                bookRepo.delete(optionalBook.get());
+                return new ResponseEntity<>("book deleted successfully",HttpStatus.ACCEPTED);
+            } else {
+                return new ResponseEntity<>("book not found",HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            logger.error("error while deleting the book :- "+e);
+            return new ResponseEntity<>("error while deleting the user",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    /**
+     * Updates a book with the given ID using the information from the provided new book.
+     *
+     * @param id      The ID of the book to be updated.
+     * @param bookNew The new book information for the update.
+     * @return ResponseEntity indicating the result of the update operation.
+     */
+    public ResponseEntity<String> updateBook(Long id,Book bookNew) {
+        try {
+            Optional<Book> optionalBook = bookRepo.findById(id);
+            if (optionalBook.isPresent()) {
+                Book book = replaceBook(optionalBook.get(),bookNew);
+                bookRepo.save(book);
+                return new ResponseEntity<>("book updated successfully",HttpStatus.ACCEPTED);
+            } else {
+                return new ResponseEntity<>("book not found by id",HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            logger.error("Error occurred while updating a book", e);
+            return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    /**
+     * Replaces the information of an old book with the information from a new book.
+     *
+     * @param oldBook The existing book to be updated.
+     * @param newBook The new book information for the update.
+     * @return The updated book.
+     */
+    private Book replaceBook(Book oldBook, Book newBook) {
+
+        if (newBook.getTitle() != null) {
+            oldBook.setTitle(newBook.getTitle());
+        }
+        if (newBook.getIsbn() != null) {
+            oldBook.setIsbn(newBook.getIsbn());
+        }
+        if (newBook.getPageCount() != null) {
+            oldBook.setPageCount(newBook.getPageCount());
+        }
+        if (newBook.getThumbnailUrl() != null) {
+            oldBook.setThumbnailUrl(newBook.getThumbnailUrl());
+        }
+        if (newBook.getShortDescription() != null) {
+            oldBook.setShortDescription(newBook.getShortDescription());
+        }
+        if (newBook.getLongDescription() != null) {
+            oldBook.setLongDescription(newBook.getLongDescription());
+        }
+        if (newBook.getStatus() != null) {
+            oldBook.setStatus(newBook.getStatus());
+        }
+        if (!newBook.getAuthors().isEmpty()) {
+            oldBook.setAuthors(newBook.getAuthors());
+        }
+        if (!newBook.getCategories().isEmpty()) {
+            oldBook.setCategories(newBook.getCategories());
+        }
+
+        return oldBook;
+    }
+
 }
