@@ -49,6 +49,14 @@ public class BookController {
         return bookService.findBookByAuthor(author,page,size);
     }
 
+    @GetMapping("/category/{category}")
+    public ResponseEntity<Page<Book>> findBookByCategory(@PathVariable String category,
+                                                               @RequestParam(defaultValue = "0") Integer page,
+                                                               @RequestParam(defaultValue = "10") Integer size
+                                                               ) {
+        return bookService.findBookByCategory(category,page,size);
+    }
+
     @PutMapping("/add/all")
     public ResponseEntity<String> addMultipleBooks(@RequestBody List<Book> list) {
         return bookService.addMultipleBooks(list);

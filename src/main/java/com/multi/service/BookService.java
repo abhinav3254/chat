@@ -206,4 +206,21 @@ public class BookService {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    public ResponseEntity<Page<Book>> findBookByCategory(String category, Integer page, Integer size) {
+        try {
+
+            logger.info("------> "+category);
+
+            List<Book> list = bookRepo.findBookByCategoryName(category);
+            Pageable pageable = PageRequest.of(page,size);
+            Page<Book> bookPage = new PageImpl<>(list,pageable,list.size());
+
+            return new ResponseEntity<>(bookPage,HttpStatus.OK);
+
+        } catch (Exception e) {
+            logger.error("error in find book by publisher",e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

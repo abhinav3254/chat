@@ -17,14 +17,18 @@ public interface BookRepo extends JpaRepository<Book,Long> {
 
 
     /**
-     * Custom query to find books by the specified author name using a native SQL query.
+     * JPQL (Java Persistence Query Language) find books by the specified author name using a native SQL query.
      *
      * @param name The name of the author to search for.
      * @return A list of Book entities that match the given author name.
      */
-    @Query(nativeQuery = true, value = "SELECT * FROM book b\n" +
-            "JOIN book_authors ba ON b.id = ba.author_id\n" +
-            "WHERE ba.author LIKE %:name%")
+    @Query("SELECT b FROM Book b JOIN b.authors ba WHERE ba LIKE %:name%")
     List<Book> findBookByAuthorName(@Param("name") String name);
+
+
+    // JPQL (Java Persistence Query Language)
+    @Query("SELECT b FROM Book b JOIN b.categories bc WHERE bc LIKE %:name%")
+    List<Book> findBookByCategoryName(@Param("name") String name);
+
 
 }
