@@ -1,73 +1,88 @@
+# Book Service API
 
+This API provides endpoints for managing and retrieving information about books.
 
-```markdown
-# Project Name
+## Base URL
+All endpoints can be accessed using the following base URL:
 
-Short description or tagline for your project.
-
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-- [Endpoints](#endpoints)
-- [Examples](#examples)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
-
-## Introduction
-
-Provide a brief introduction to your project. Mention the purpose, goals, or any other relevant information.
-
-## Features
-
-List key features of your project.
-
-- Feature 1
-- Feature 2
-- ...
-
-## Getting Started
-
-### Prerequisites
-
-- List any software or tools that users need to have installed before they can use your project.
-
-### Installation
-
-1. Provide step-by-step instructions on how to install your project.
-2. Include any configuration steps or dependencies.
-
-## Usage
-
-Explain how to use your project. Provide code snippets, examples, or any other relevant information.
+```
+http://localhost:8080/book
+```
 
 ## Endpoints
 
-Document key API endpoints if applicable.
+### 1. Add a Book
 
-- `/api/endpoint1`: Description of the endpoint.
-- `/api/endpoint2`: Description of the endpoint.
-- ...
+- **URL:** `/add`
+- **Method:** PUT
+- **Request Body:** Book details in JSON format.
+- **Response:** Returns a message indicating the success or failure of the operation.
 
-## Examples
+### 2. Get All Books
 
-Provide examples or use cases to help users understand how to use your project.
+- **URL:** `/`
+- **Method:** GET
+- **Parameters:**
+    - `page` (optional, default: 0): Page number for pagination.
+    - `size` (optional, default: 10): Number of items per page.
+- **Response:** Returns a page of books.
 
-## Contributing
+### 3. Delete a Book by ID
 
-Explain how others can contribute to your project. Include guidelines for bug reporting, feature requests, or code contributions.
+- **URL:** `/delete/{id}`
+- **Method:** DELETE
+- **Path Variable:** `id` - ID of the book to be deleted.
+- **Response:** Returns a message indicating the success or failure of the operation.
 
-## License
+### 4. Update a Book by ID
 
-This project is licensed under the [License Name] - see the [LICENSE.md](LICENSE.md) file for details.
+- **URL:** `/update/{id}`
+- **Method:** PATCH
+- **Path Variable:** `id` - ID of the book to be updated.
+- **Request Body:** Updated book details in JSON format.
+- **Response:** Returns a message indicating the success or failure of the operation.
 
-## Acknowledgments
+### 5. Find Books by Author
 
-Mention any contributors, libraries, or resources that you would like to acknowledge.
+- **URL:** `/author/{author}`
+- **Method:** GET
+- **Path Variable:** `author` - Author's name.
+- **Parameters:**
+    - `page` (optional, default: 0): Page number for pagination.
+    - `size` (optional, default: 10): Number of items per page.
+- **Response:** Returns a page of books written by the specified author.
 
-```
+### 6. Find Books by Category
+
+- **URL:** `/category/{category}`
+- **Method:** GET
+- **Path Variable:** `category` - Book category.
+- **Parameters:**
+    - `page` (optional, default: 0): Page number for pagination.
+    - `size` (optional, default: 10): Number of items per page.
+- **Response:** Returns a page of books belonging to the specified category.
+
+### 7. Add Multiple Books
+
+- **URL:** `/add/all`
+- **Method:** PUT
+- **Request Body:** List of books in JSON format.
+- **Response:** Returns a message indicating the success or failure of the operation.
+
+### 8. Search Books
+
+- **URL:** `/search/{search}`
+- **Method:** GET
+- **Path Variable:** `search` - Search term.
+- **Parameters:**
+    - `page` (optional, default: 0): Page number for pagination.
+    - `size` (optional, default: 10): Number of items per page.
+- **Response:** Returns a page of books matching the specified search term.
+
+## Notes
+
+- All endpoints support pagination for retrieving a subset of the results.
+- The base URL for the API is `http://localhost:8080/book`.
+- Make sure to replace `{id}`, `{author}`, `{category}`, and `{search}` with actual values when making requests.
+
+Feel free to explore and interact with the various endpoints to manage and retrieve information about books.
