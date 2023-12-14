@@ -207,6 +207,16 @@ public class BookService {
         }
     }
 
+
+    /**
+     * Retrieves a paginated list of books belonging to a specific category.
+     *
+     * @param category The category name to filter the books.
+     * @param page     The page number for pagination.
+     * @param size     The number of items per page.
+     * @return A ResponseEntity containing a Page of books in the specified category.
+     *         Returns HttpStatus.OK if successful, or HttpStatus.INTERNAL_SERVER_ERROR on failure.
+     */
     public ResponseEntity<Page<Book>> findBookByCategory(String category, Integer page, Integer size) {
         try {
 
@@ -222,6 +232,17 @@ public class BookService {
         }
     }
 
+
+    /**
+     * Searches for books based on the specified search term, including book title, ISBN, descriptions,
+     * status, authors, and categories.
+     *
+     * @param search The search term to filter and search for books.
+     * @param page   The page number for pagination.
+     * @param size   The number of items per page.
+     * @return A ResponseEntity containing a Page of books matching the search term.
+     *         Returns HttpStatus.OK if successful, or HttpStatus.INTERNAL_SERVER_ERROR on failure.
+     */
     public ResponseEntity<Page<Book>> searchBooks(String search,Integer page, Integer size) {
         try {
             List<Book> list = bookRepo.searchBooks(search);
