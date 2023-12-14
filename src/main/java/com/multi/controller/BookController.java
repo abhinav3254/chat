@@ -62,4 +62,11 @@ public class BookController {
         return bookService.addMultipleBooks(list);
     }
 
+    @GetMapping("/search/{search}")
+    public ResponseEntity<Page<Book>> searchBooks(@PathVariable String search,
+                                                  @RequestParam(defaultValue = "0") Integer page,
+                                                  @RequestParam(defaultValue = "10") Integer size) {
+        return bookService.searchBooks(search,page,size);
+    }
+
 }

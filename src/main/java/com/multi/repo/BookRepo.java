@@ -31,4 +31,17 @@ public interface BookRepo extends JpaRepository<Book,Long> {
     List<Book> findBookByCategoryName(@Param("name") String name);
 
 
+
+    @Query("SELECT b FROM Book b " +
+            "WHERE lower(b.title) LIKE lower(concat('%', :searchTerm, '%')) " +
+            "   OR lower(b.isbn) LIKE lower(concat('%', :searchTerm, '%')) " +
+            "   OR lower(b.shortDescription) LIKE lower(concat('%', :searchTerm, '%')) " +
+            "   OR lower(b.longDescription) LIKE lower(concat('%', :searchTerm, '%')) " +
+            "   OR lower(b.status) LIKE lower(concat('%', :searchTerm, '%')) " +
+            "   OR :searchTerm IN elements(b.authors) " +
+            "   OR :searchTerm IN elements(b.categories)")
+    List<Book> searchBooks(@Param("searchTerm") String searchTerm);
+
+
+
 }

@@ -210,8 +210,6 @@ public class BookService {
     public ResponseEntity<Page<Book>> findBookByCategory(String category, Integer page, Integer size) {
         try {
 
-            logger.info("------> "+category);
-
             List<Book> list = bookRepo.findBookByCategoryName(category);
             Pageable pageable = PageRequest.of(page,size);
             Page<Book> bookPage = new PageImpl<>(list,pageable,list.size());
@@ -220,6 +218,18 @@ public class BookService {
 
         } catch (Exception e) {
             logger.error("error in find book by publisher",e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public ResponseEntity<Page<Book>> searchBooks(String search,Integer page, Integer size) {
+        try {
+            List<Book> list = bookRepo.searchBooks(search);
+            Pageable pageable = PageRequest.of(page,size);
+            Page<Book> bookPage = new PageImpl<>(list,pageable, list.size());
+            return new ResponseEntity<>(bookPage,HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("error while searching :- ",e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
