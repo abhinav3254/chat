@@ -21,6 +21,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Service class for managing books.
+ *
+ * @author AbKumar
  */
 @Service
 public class BookService {
