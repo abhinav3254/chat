@@ -1,88 +1,155 @@
-# Book Service API
+I've combined the two READMEs into one, providing both the overview and detailed endpoint information:
 
-This API provides endpoints for managing and retrieving information about books.
+# Multi-Part Book Service API
 
-## Base URL
-All endpoints can be accessed using the following base URL:
+## Overview
+This project is a Spring Boot-based RESTful API for managing a collection of books. It supports basic CRUD operations for books, including searching by various criteria.
 
+## Technologies Used
+- [Spring Boot](https://spring.io/projects/spring-boot): Framework for creating stand-alone, production-grade Spring-based Applications.
+- [Spring Data JPA](https://spring.io/projects/spring-data-jpa): Simplifies data access using the Java Persistence API (JPA).
+- [PostgreSQL](https://www.postgresql.org/): Database system for storing book information.
+- [Apache PDFBox](https://pdfbox.apache.org/): Library for PDF document manipulation.
+- [Lombok](https://projectlombok.org/): Library to simplify Java code by reducing boilerplate code.
+- [JUnit](https://junit.org/junit5/): Testing framework for unit testing.
+
+## Prerequisites
+- Java 11 or higher
+- PostgreSQL database
+- Maven
+
+## Getting Started
+1. Clone the repository: `git clone <repository-url>`
+2. Navigate to the project directory: `cd multi-part`
+3. Configure the database connection in `application.properties` or `application.yml`.
+4. Build the project: `mvn clean install`
+5. Run the application: `mvn spring-boot:run`
+
+## API Endpoints
+
+### Get All Books
+```http
+GET /book/
 ```
-http://localhost:8080/book
+Retrieve a paginated list of all books.
+
+#### Parameters
+- `page` (optional): Page number (default: 0)
+- `size` (optional): Number of items per page (default: 10)
+
+### Get Book by Author
+```http
+GET /book/author/{author}
+```
+Retrieve books by a specific author.
+
+#### Parameters
+- `author`: Name of the author
+
+### Get Book by Category
+```http
+GET /book/category/{category}
+```
+Retrieve books by a specific category.
+
+#### Parameters
+- `category`: Name of the category
+
+### Search Books
+```http
+GET /book/search/{search}
+```
+Search books based on a search term.
+
+#### Parameters
+- `search`: Search term
+
+### Add a Book
+```http
+PUT /book/add
+```
+Add a new book.
+
+#### Request Body
+```json
+{
+    "title": "Book Title",
+    "isbn": "ISBN-1234567890",
+    "pageCount": 300,
+    "thumbnailUrl": "https://example.com/thumbnail.jpg",
+    "shortDescription": "Short description of the book.",
+    "longDescription": "Long description of the book.",
+    "status": "PUBLISH",
+    "authors": ["Author1", "Author2"],
+    "categories": ["Category1", "Category2"],
+    "date": "2023-12-14T09:40:20.291+00:00"
+}
 ```
 
-## Endpoints
+### Update a Book
+```http
+PATCH /book/update/{id}
+```
+Update an existing book.
 
-### 1. Add a Book
+#### Parameters
+- `id`: ID of the book to update
 
-- **URL:** `/add`
-- **Method:** PUT
-- **Request Body:** Book details in JSON format.
-- **Response:** Returns a message indicating the success or failure of the operation.
+#### Request Body
+```json
+{
+    "title": "Updated Title",
+    "shortDescription": "Updated short description."
+}
+```
 
-### 2. Get All Books
+### Delete a Book
+```http
+DELETE /book/delete/{id}
+```
+Delete an existing book.
 
-- **URL:** `/`
-- **Method:** GET
-- **Parameters:**
-    - `page` (optional, default: 0): Page number for pagination.
-    - `size` (optional, default: 10): Number of items per page.
-- **Response:** Returns a page of books.
+#### Parameters
+- `id`: ID of the book to delete
 
-### 3. Delete a Book by ID
+### Add Multiple Books
+```http
+PUT /book/add/all
+```
+Add multiple books.
 
-- **URL:** `/delete/{id}`
-- **Method:** DELETE
-- **Path Variable:** `id` - ID of the book to be deleted.
-- **Response:** Returns a message indicating the success or failure of the operation.
+#### Request Body
+```json
+[
+    {
+        "title": "Book Title 1"
+    },
+    {
+        "title": "Book Title 2"
+    }
+]
+```
 
-### 4. Update a Book by ID
+### Find Books by Publisher
+```http
+GET /book/publisher/{publisher}
+```
+Retrieve books by a specific publisher.
 
-- **URL:** `/update/{id}`
-- **Method:** PATCH
-- **Path Variable:** `id` - ID of the book to be updated.
-- **Request Body:** Updated book details in JSON format.
-- **Response:** Returns a message indicating the success or failure of the operation.
+#### Parameters
+- `publisher`: Name of the publisher
 
-### 5. Find Books by Author
+### Search Books by Language
+```http
+GET /book/language/{language}
+```
+Search books by a specific language.
 
-- **URL:** `/author/{author}`
-- **Method:** GET
-- **Path Variable:** `author` - Author's name.
-- **Parameters:**
-    - `page` (optional, default: 0): Page number for pagination.
-    - `size` (optional, default: 10): Number of items per page.
-- **Response:** Returns a page of books written by the specified author.
+#### Parameters
+- `language`: Language of the book
 
-### 6. Find Books by Category
+## Contributing
+Feel free to open issues or submit pull requests.
 
-- **URL:** `/category/{category}`
-- **Method:** GET
-- **Path Variable:** `category` - Book category.
-- **Parameters:**
-    - `page` (optional, default: 0): Page number for pagination.
-    - `size` (optional, default: 10): Number of items per page.
-- **Response:** Returns a page of books belonging to the specified category.
-
-### 7. Add Multiple Books
-
-- **URL:** `/add/all`
-- **Method:** PUT
-- **Request Body:** List of books in JSON format.
-- **Response:** Returns a message indicating the success or failure of the operation.
-
-### 8. Search Books
-
-- **URL:** `/search/{search}`
-- **Method:** GET
-- **Path Variable:** `search` - Search term.
-- **Parameters:**
-    - `page` (optional, default: 0): Page number for pagination.
-    - `size` (optional, default: 10): Number of items per page.
-- **Response:** Returns a page of books matching the specified search term.
-
-## Notes
-
-- All endpoints support pagination for retrieving a subset of the results.
-- The base URL for the API is `http://localhost:8080/book`.
-- Make sure to replace `{id}`, `{author}`, `{category}`, and `{search}` with actual values when making requests.
-
-Feel free to explore and interact with the various endpoints to manage and retrieve information about books.
+## License
+This project is licensed under the [MIT License](LICENSE).
