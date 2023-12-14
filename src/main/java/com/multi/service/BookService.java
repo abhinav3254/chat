@@ -180,4 +180,30 @@ public class BookService {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    /**
+     * Endpoint for adding multiple books to the database.
+     *
+     * @param list A list of Book entities to be added.
+     * @return ResponseEntity indicating the status of the operation.
+     */
+    public ResponseEntity<String> addMultipleBooks(List<Book> list) {
+        try {
+
+            if (!list.isEmpty()) {
+                for(Book book:list) {
+                    book.setDate(new Date());
+                    bookRepo.save(book);
+                }
+                return new ResponseEntity<>(list.size()+" books added",HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>("empty list",HttpStatus.NOT_ACCEPTABLE);
+            }
+
+        } catch (Exception e) {
+            logger.error("multiple add method got into error :- ",e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

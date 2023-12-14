@@ -49,4 +49,9 @@ public class BookController {
         return bookService.findBookByAuthor(author,page,size);
     }
 
+    @PutMapping("/add/all")
+    public ResponseEntity<String> addMultipleBooks(@RequestBody List<Book> list) {
+        return bookService.addMultipleBooks(list);
+    }
+
 }
