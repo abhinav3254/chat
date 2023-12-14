@@ -1,6 +1,6 @@
 I've combined the two READMEs into one, providing both the overview and detailed endpoint information:
 
-# Multi-Part Book Service API
+# Book Service API
 
 ## Overview
 This project is a Spring Boot-based RESTful API for managing a collection of books. It supports basic CRUD operations for books, including searching by various criteria.
