@@ -26,12 +26,26 @@ public interface BookRepo extends JpaRepository<Book,Long> {
     List<Book> findBookByAuthorName(@Param("name") String name);
 
 
+    /**
+     * Custom query to find books by category name.
+     *
+     * @param name The category name to search for in the book's categories.
+     * @return List of books belonging to the specified category.
+     */
+
     // JPQL (Java Persistence Query Language)
     @Query("SELECT b FROM Book b JOIN b.categories bc WHERE bc LIKE %:name%")
     List<Book> findBookByCategoryName(@Param("name") String name);
 
 
 
+    /**
+     * Custom query to search for books based on various criteria.
+     *
+     * @param searchTerm The term to search for in the book's title, ISBN, short and long descriptions,
+     *                   status, authors, and categories.
+     * @return List of books matching the search criteria.
+     */
     @Query("SELECT b FROM Book b " +
             "WHERE lower(b.title) LIKE lower(concat('%', :searchTerm, '%')) " +
             "   OR lower(b.isbn) LIKE lower(concat('%', :searchTerm, '%')) " +
