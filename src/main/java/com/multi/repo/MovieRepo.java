@@ -22,4 +22,6 @@ public interface MovieRepo extends JpaRepository<Movies,Integer> {
     @Query("SELECT m FROM Movies m JOIN m.actors a WHERE a = :actor")
     List<Movies> findMovieByActor(@Param("actor") String actor);
 
+    List<Movies> findByYear(String year);
+
 }

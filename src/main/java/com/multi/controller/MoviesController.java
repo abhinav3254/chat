@@ -43,4 +43,12 @@ public class MoviesController {
         return movieService.findMoviesByActor(actor,page,size);
     }
 
+    @GetMapping("/year/{year}")
+    public ResponseEntity<Page<Movies>> findMoviesByYear(@PathVariable String year,
+                                                         @RequestParam(defaultValue = "0") Integer page,
+                                                         @RequestParam(defaultValue = "10") Integer size
+                                                         ) {
+        return movieService.findMoviesByYear(year,page,size);
+    }
+
 }

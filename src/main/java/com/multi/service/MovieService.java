@@ -109,4 +109,20 @@ public class MovieService {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    public ResponseEntity<Page<Movies>> findMoviesByYear(String year, Integer page, Integer size) {
+        try {
+
+            List<Movies> list = movieRepo.findByYear(year);
+
+            Pageable pageable = PageRequest.of(page,size);
+            Page<Movies> moviesPage = new PageImpl<>(list,pageable,list.size());
+
+            return new ResponseEntity<>(moviesPage,HttpStatus.OK);
+
+        } catch (Exception e) {
+            logger.error("something went wrong in search movie by year",e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
