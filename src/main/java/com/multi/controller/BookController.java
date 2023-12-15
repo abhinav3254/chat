@@ -51,8 +51,8 @@ public class BookController {
 
     @GetMapping("/category/{category}")
     public ResponseEntity<Page<Book>> findBookByCategory(@PathVariable String category,
-                                                               @RequestParam(defaultValue = "0") Integer page,
-                                                               @RequestParam(defaultValue = "10") Integer size
+                                                         @RequestParam(defaultValue = "0") Integer page,
+                                                         @RequestParam(defaultValue = "10") Integer size
                                                                ) {
         return bookService.findBookByCategory(category,page,size);
     }
