@@ -1,6 +1,8 @@
 package com.multi.repo;
 
 import com.multi.entity.Book;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -54,8 +56,7 @@ public interface BookRepo extends JpaRepository<Book,Long> {
             "   OR lower(b.status) LIKE lower(concat('%', :searchTerm, '%')) " +
             "   OR :searchTerm IN elements(b.authors) " +
             "   OR :searchTerm IN elements(b.categories)")
-    List<Book> searchBooks(@Param("searchTerm") String searchTerm);
-
+    Page<Book> searchBooks(@Param("searchTerm") String searchTerm, Pageable pageable);
 
 
 }

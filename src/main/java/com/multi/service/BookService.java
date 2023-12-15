@@ -245,15 +245,14 @@ public class BookService {
      * @return A ResponseEntity containing a Page of books matching the search term.
      *         Returns HttpStatus. OK if successful, or HttpStatus.INTERNAL_SERVER_ERROR on failure.
      */
-    public ResponseEntity<Page<Book>> searchBooks(String search,Integer page, Integer size) {
+    public ResponseEntity<Page<Book>> searchBooks(String search, Integer page, Integer size) {
         try {
-            List<Book> list = bookRepo.searchBooks(search);
-            Pageable pageable = PageRequest.of(page,size);
-            Page<Book> bookPage = new PageImpl<>(list,pageable, list.size());
-            return new ResponseEntity<>(bookPage,HttpStatus.OK);
+            Page<Book> bookPage = bookRepo.searchBooks(search, PageRequest.of(page, size));
+            return new ResponseEntity<>(bookPage, HttpStatus.OK);
         } catch (Exception e) {
-            logger.error("error while searching :- ",e);
+            logger.error("Error while searching :- ", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }
