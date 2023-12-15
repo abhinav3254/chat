@@ -53,7 +53,7 @@ public class BookController {
                                                          @RequestParam(defaultValue = "0") Integer page,
                                                          @RequestParam(defaultValue = "10") Integer size
                                                                ) {
-        return bookService.findBookByCategory(category,page,size);
+        return bookService.findBooksByCategoryName(category,page,size);
     }
 
     @PutMapping("/add/all")

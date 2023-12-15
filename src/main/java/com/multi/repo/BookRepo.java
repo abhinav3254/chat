@@ -37,7 +37,8 @@ public interface BookRepo extends JpaRepository<Book,Long> {
 
     // JPQL (Java Persistence Query Language)
     @Query("SELECT b FROM Book b JOIN b.categories bc WHERE bc LIKE %:name%")
-    List<Book> findBookByCategoryName(@Param("name") String name);
+    Page<Book> findBookByCategoryName(@Param("name") String name, Pageable pageable);
+
 
 
 

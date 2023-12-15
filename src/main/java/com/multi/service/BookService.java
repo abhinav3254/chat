@@ -213,26 +213,22 @@ public class BookService {
     /**
      * Retrieves a paginated list of books belonging to a specific category.
      *
-     * @param category The category name to filter the books.
+     * @param categoryName The category name to filter the books.
      * @param page     The page number for pagination.
      * @param size     The number of items per page.
      * @return A ResponseEntity containing a Page of books in the specified category.
      *         Returns HttpStatus. OK if successful, or HttpStatus.INTERNAL_SERVER_ERROR on failure.
      */
-    public ResponseEntity<Page<Book>> findBookByCategory(String category, Integer page, Integer size) {
+    public ResponseEntity<Page<Book>> findBooksByCategoryName(String categoryName, Integer page, Integer size) {
         try {
-
-            List<Book> list = bookRepo.findBookByCategoryName(category);
-            Pageable pageable = PageRequest.of(page,size);
-            Page<Book> bookPage = new PageImpl<>(list,pageable,list.size());
-
-            return new ResponseEntity<>(bookPage,HttpStatus.OK);
-
+            Page<Book> bookPage = bookRepo.findBookByCategoryName(categoryName, PageRequest.of(page, size));
+            return new ResponseEntity<>(bookPage, HttpStatus.OK);
         } catch (Exception e) {
-            logger.error("error in find book by publisher",e);
+            logger.error("Error while searching books by category name", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
 
     /**
