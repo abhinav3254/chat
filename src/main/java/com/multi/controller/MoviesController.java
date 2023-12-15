@@ -34,4 +34,13 @@ public class MoviesController {
         return movieService.addMultipleMovies(list);
     }
 
+
+    @GetMapping("/actor/{actor}")
+    public ResponseEntity<Page<Movies>> findMoviesByActor(@PathVariable String actor,
+                                                          @RequestParam(defaultValue = "0") Integer page,
+                                                          @RequestParam(defaultValue = "10") Integer size
+    ) {
+        return movieService.findMoviesByActor(actor,page,size);
+    }
+
 }
