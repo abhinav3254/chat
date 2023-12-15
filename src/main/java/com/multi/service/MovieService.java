@@ -15,6 +15,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+/**
+ * Service class for managing movie-related operations.
+ *
+ * @author AbKumar
+ */
 @Service
 public class MovieService {
 
