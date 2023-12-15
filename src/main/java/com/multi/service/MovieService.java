@@ -18,11 +18,20 @@ import java.util.List;
 @Service
 public class MovieService {
 
+    // Logger for logging messages
     private static final Logger logger = LoggerFactory.getLogger(BookService.class);
 
+    // Autowired MovieRepo for database operations
     @Autowired
     private MovieRepo movieRepo;
 
+
+    /**
+     * Adds a single movie to the database.
+     *
+     * @param movies The movie to be added.
+     * @return ResponseEntity with a success message or an error message.
+     */
     public ResponseEntity<String> addMovies(Movies movies) {
         try {
             movieRepo.save(movies);
@@ -33,6 +42,14 @@ public class MovieService {
         }
     }
 
+
+    /**
+     * Retrieves all movies from the database with pagination.
+     *
+     * @param page Page number for pagination.
+     * @param size Number of movies per page.
+     * @return ResponseEntity with a page of movies or an error message.
+     */
     public ResponseEntity<Page<Movies>> getAllMovies(int page,int size) {
         try {
             Pageable pageable = PageRequest.of(page,size);
@@ -44,6 +61,13 @@ public class MovieService {
         }
     }
 
+
+    /**
+     * Adds multiple movies to the database.
+     *
+     * @param list List of movies to be added.
+     * @return ResponseEntity with a success message or an error message.
+     */
     public ResponseEntity<String> addMultipleMovies(List<Movies> list) {
         try {
 
