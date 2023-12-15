@@ -217,7 +217,7 @@ public class BookService {
      * @param page     The page number for pagination.
      * @param size     The number of items per page.
      * @return A ResponseEntity containing a Page of books in the specified category.
-     *         Returns HttpStatus.OK if successful, or HttpStatus.INTERNAL_SERVER_ERROR on failure.
+     *         Returns HttpStatus. OK if successful, or HttpStatus.INTERNAL_SERVER_ERROR on failure.
      */
     public ResponseEntity<Page<Book>> findBookByCategory(String category, Integer page, Integer size) {
         try {
@@ -243,7 +243,7 @@ public class BookService {
      * @param page   The page number for pagination.
      * @param size   The number of items per page.
      * @return A ResponseEntity containing a Page of books matching the search term.
-     *         Returns HttpStatus.OK if successful, or HttpStatus.INTERNAL_SERVER_ERROR on failure.
+     *         Returns HttpStatus. OK if successful, or HttpStatus.INTERNAL_SERVER_ERROR on failure.
      */
     public ResponseEntity<Page<Book>> searchBooks(String search,Integer page, Integer size) {
         try {
