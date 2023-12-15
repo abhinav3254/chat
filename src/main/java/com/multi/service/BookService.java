@@ -228,7 +228,6 @@ public class BookService {
     }
 
 
-
     /**
      * Searches for books based on the specified search term, including book title, ISBN, descriptions,
      * status, authors, and categories.
