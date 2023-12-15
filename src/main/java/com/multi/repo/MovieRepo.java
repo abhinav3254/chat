@@ -24,4 +24,5 @@ public interface MovieRepo extends JpaRepository<Movies,Integer> {
 
     List<Movies> findByYear(String year);
 
+    List<Movies> findByTitle(String search);
 }

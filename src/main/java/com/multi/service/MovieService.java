@@ -110,6 +110,15 @@ public class MovieService {
         }
     }
 
+
+    /**
+     * Finds movies based on the provided year, paginates the result, and returns a ResponseEntity.
+     *
+     * @param year The year to search for movies.
+     * @param page The page number for pagination.
+     * @param size The size of each page for pagination.
+     * @return ResponseEntity containing a page of Movies or INTERNAL_SERVER_ERROR if an exception occurs.
+     */
     public ResponseEntity<Page<Movies>> findMoviesByYear(String year, Integer page, Integer size) {
         try {
 
@@ -122,6 +131,29 @@ public class MovieService {
 
         } catch (Exception e) {
             logger.error("something went wrong in search movie by year",e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    /**
+     * Searches for movies based on the provided search term, paginates the result, and returns a ResponseEntity.
+     *
+     * @param search The search term to find movies.
+     * @param page   The page number for pagination.
+     * @param size   The size of each page for pagination.
+     * @return ResponseEntity containing a page of Movies or INTERNAL_SERVER_ERROR if an exception occurs.
+     */
+    public ResponseEntity<Page<Movies>> searchMovies(String search,Integer page,Integer size) {
+        try {
+
+            List<Movies> list = movieRepo.findByTitle(search);
+            Pageable pageable = PageRequest.of(page,size);
+            Page<Movies> moviesPage = new PageImpl(list,pageable,list.size());
+            return new ResponseEntity<>(moviesPage,HttpStatus.OK);
+
+        } catch (Exception e) {
+            logger.error("error in search movies",e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
