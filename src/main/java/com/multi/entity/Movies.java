@@ -3,12 +3,12 @@ package com.multi.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Movies {
 
@@ -55,25 +55,4 @@ public class Movies {
 
     private double imdbRating;
     private String posterurl;
-
-    // Add a constructor excluding List fields
-    public Movies(Integer id, String title, String year, List<String> genres, List<Integer> ratings,
-                  String contentRating, String duration, String releaseDate, int averageRating,
-                  String originalTitle, String storyline, List<String> actors,
-                  double imdbRating, String posterUrl) {
-        this.id = id;
-        this.title = title;
-        this.year = year;
-        this.genres = genres;
-        this.ratings = ratings;
-        this.contentRating = contentRating;
-        this.duration = duration;
-        this.releaseDate = releaseDate;
-        this.averageRating = averageRating;
-        this.originalTitle = originalTitle;
-        this.storyline = storyline;
-        this.actors = actors;
-        this.imdbRating = imdbRating;
-        this.posterurl = posterUrl;
-    }
 }
