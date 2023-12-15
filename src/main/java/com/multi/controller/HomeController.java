@@ -22,13 +22,13 @@ public class HomeController {
     @Autowired
     private FileRepo fileRepository;
 
-//    @PutMapping("/upload")
-//    public ResponseEntity<String> uploadFile(@RequestParam("file")MultipartFile multipartFile) {
-//        if (multipartFile.isEmpty())
-//        return new ResponseEntity<>("file failed to upload", HttpStatus.NOT_ACCEPTABLE);
-//        else return new ResponseEntity<>("file uploaded", HttpStatus.ACCEPTED);
-//    }
 
+    /**
+     * Endpoint to read the content of a file given its file path.
+     *
+     * @param filePath The path of the file to be read.
+     * @return ResponseEntity containing the content of the file or an error message, and HTTP status.
+     */
     @GetMapping("/readFile")
     public ResponseEntity<String> readFile(@RequestParam String filePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -45,7 +45,12 @@ public class HomeController {
     }
 
 
-
+    /**
+     * Endpoint to upload a file.
+     *
+     * @param multipartFile The MultipartFile representing the uploaded file.
+     * @return ResponseEntity containing a message indicating success or failure and HTTP status.
+     */
     @PutMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile multipartFile) {
         if (multipartFile.isEmpty()) {
@@ -70,11 +75,14 @@ public class HomeController {
         }
     }
 
-
+    /**
+     * Endpoint to download a file based on its ID.
+     *
+     * @param fileId The ID of the file to be downloaded.
+     * @return ResponseEntity containing the file content, headers for download, and HTTP status.
+     */
     @GetMapping("/download/{fileId}")
     public ResponseEntity<byte[]> downloadFile(@PathVariable Long fileId) {
-
-        System.out.println("------>> Here is the issue <<---------");
 
         // Retrieve FileEntity from the database
         Optional<FileEntity> optionalFileEntity = fileRepository.findById(fileId);
