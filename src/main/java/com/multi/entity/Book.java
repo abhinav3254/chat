@@ -33,6 +33,9 @@ import java.util.List;
  *
  * This class is intended to be used in conjunction with a JPA-enabled
  * persistence layer to interact with a relational database.
+ *
+ *
+ * @author AbKumar
  */
 @Data
 @Entity
