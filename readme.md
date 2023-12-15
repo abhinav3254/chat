@@ -1,4 +1,3 @@
-I've combined the two READMEs into one, providing both the overview and detailed endpoint information:
 
 # Book Service API
 
