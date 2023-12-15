@@ -149,7 +149,7 @@ public class MovieService {
 
             List<Movies> list = movieRepo.findByTitle(search);
             Pageable pageable = PageRequest.of(page,size);
-            Page<Movies> moviesPage = new PageImpl(list,pageable,list.size());
+            Page<Movies> moviesPage = new PageImpl<>(list,pageable,list.size());
             return new ResponseEntity<>(moviesPage,HttpStatus.OK);
 
         } catch (Exception e) {
