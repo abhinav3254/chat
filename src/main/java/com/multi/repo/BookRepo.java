@@ -25,7 +25,7 @@ public interface BookRepo extends JpaRepository<Book,Long> {
      * @return A list of Book entities that match the given author name.
      */
     @Query("SELECT b FROM Book b JOIN b.authors ba WHERE ba LIKE %:name%")
-    List<Book> findBookByAuthorName(@Param("name") String name);
+    Page<Book> findBookByAuthorName(@Param("name") String name, Pageable pageable);
 
 
     /**

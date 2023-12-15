@@ -172,9 +172,7 @@ public class BookService {
     public ResponseEntity<Page<Book>> findBookByAuthor(String author, int page, int size) {
         try {
 
-            List<Book> list = bookRepo.findBookByAuthorName(author);
-            Pageable pageable = PageRequest.of(page, size);
-            Page<Book> bookPage = new PageImpl<>(list, pageable, list.size());
+            Page<Book> bookPage = bookRepo.findBookByAuthorName(author,PageRequest.of(page,size));
             return new ResponseEntity<>(bookPage, HttpStatus.OK);
 
         } catch (Exception e) {
