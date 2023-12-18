@@ -15,6 +15,8 @@ This project is a Spring Boot-based RESTful API for managing a collection of boo
 ## Prerequisites
 - Java 11 or higher
 - PostgreSQL database
+- MySQL database
+- h2 database
 - Maven
 
 ## Getting Started
