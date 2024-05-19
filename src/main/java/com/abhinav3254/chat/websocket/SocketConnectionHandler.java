@@ -70,7 +70,7 @@ public class SocketConnectionHandler extends TextWebSocketHandler {
         String senderId = claims.get("id").toString();
         messageDTO.setSender(senderId);
 
-        // Save message to database
+        // Save message to a database
         Optional<User> senderUserOptional = userRepository.findById(Long.parseLong(messageDTO.getSender()));
         Optional<User> receiverUserOptional = userRepository.findById(Long.parseLong(messageDTO.getReceiver()));
 
