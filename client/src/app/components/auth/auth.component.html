@@ -1,0 +1,10 @@
+<div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div
+            *ngIf="(loginForm.controls.email.touched || loginForm.controls.email.dirty) && !loginForm.controls.email.valid">
+        </div>
+        <input formControlName="email" type="text" placeholder="Email">
+        <input formControlName="password" type="password" placeholder="Password">
+        <button type="submit">Submit</button>
+    </form>
+</div>

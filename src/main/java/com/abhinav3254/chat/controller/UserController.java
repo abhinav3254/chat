@@ -6,10 +6,7 @@ import com.abhinav3254.chat.model.User;
 import com.abhinav3254.chat.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -26,4 +23,15 @@ public class UserController {
     public ResponseEntity<?> register(@RequestBody User user) {
         return userService.registerUser(user);
     }
+
+    @GetMapping("/user")
+    public ResponseEntity<?> getAllTheUsers() {
+        return userService.getAllTheUsers();
+    }
+
+    @GetMapping("/chat-history/{userId}")
+    public ResponseEntity<?> getChatHistory(@PathVariable("userId") Long userId) {
+        return userService.getChatHistory(userId);
+    }
+
 }

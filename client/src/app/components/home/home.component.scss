@@ -1,0 +1,74 @@
+.Home {
+    display: flex;
+    flex-direction: row;
+
+    .SideNav {
+        width: 20%;
+        border: 1px solid gray;
+        height: 97vh;
+        padding: 10px;
+    
+        .ChatConatiner {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            border: 1px solid gainsboro;
+    
+            img {
+                width: 40px;
+                height: 40px;
+            }
+    
+            .UserBody {
+                display: flex;
+                flex-direction: column;
+                margin-left: 10px;
+                
+                p {
+                    margin: 0;
+                    padding: 0;
+                }
+    
+                .Username {
+                    font-size: 15px;
+                }
+    
+                .UserMessage {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
+    .ChatBoard {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    
+        .ChatBody {
+            height: 95%;
+        }
+
+        .ChatOptions {
+            border: 1px solid red;
+            height: 40px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            input {
+                height: 80%;
+                width: 90%;
+            }
+
+            button {
+                border: none;
+                width: 20px;
+                margin: auto;
+            }
+        }
+    }
+}
+
+
