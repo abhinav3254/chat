@@ -1,0 +1,132 @@
+body {
+    background-color: gainsboro;
+}
+.search {
+    margin: 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search input {
+    margin: 0 10px;
+    padding: 6px 12px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 4px;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    :focus{
+        color: #212529;
+        background-color: #fff;
+        border-color: #86b7fe;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+    }
+    
+}
+
+.search button {
+    cursor: pointer;
+    outline: 0;
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    font-size: 16px;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    :hover {
+        color: #fff;
+        background-color: #0b5ed7;
+        border-color: #0a58ca;
+    }
+
+}
+
+
+.words {
+    margin: auto;
+    width: fit-content;
+}
+
+
+.DataSingle {
+    margin: 10px 20px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+
+.phonetics-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.phonetics {
+    margin: 10px;
+    padding: 5px 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: gainsboro;
+    border-radius: 10%;
+}
+
+.phonetics-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.phonetics-row p {
+    color: black;
+}
+
+.phonetics img {
+    width: 24px;
+    height: 24px;
+    margin: 0 0 0 10px;
+}
+
+.synonyms {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 5px 0;
+}
+
+.synonymsElement {
+    margin: 2px 4px;
+    padding: 2px;
+    background-color: gainsboro;
+}
+
+.meanings {
+    padding: 2px 10px;
+    margin: 2px 10px;
+}
+
+.Indexing {
+    display: flex;
+    align-items: center;
+}
+
+.Indexing img {
+    width: 12px;
+    height: 12px;
+}
+
+.Indexing p {
+    font-size: 12px;
+}
